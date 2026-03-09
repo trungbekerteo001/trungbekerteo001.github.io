@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nguyen Hung Le Trung | Portfolio</title>
+  <meta name="description" content="Portfolio of Nguyen Hung Le Trung - Junior .NET Backend Developer" />
+  <style>
+    :root{
+      --bg:#f3f7fc;
+      --bg-soft:#eef4fb;
+      --panel:#ffffff;
+      --panel-2:#f8fbff;
+      --line:#d8e5f3;
+      --text:#10233c;
+      --muted:#5d728d;
+      --accent:#2f80ed;
+      --accent-2:#56ccf2;
+      --accent-soft:#e8f2ff;
+      --success:#ecfdf3;
+      --shadow:0 16px 42px rgba(24, 55, 90, .10);
+      --shadow-soft:0 10px 28px rgba(24, 55, 90, .07);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(86,204,242,.22), transparent 20%),
+        radial-gradient(circle at top right, rgba(47,128,237,.14), transparent 18%),
+        linear-gradient(180deg, #f7fbff 0%, #f1f6fc 100%);
+    }
+    a{color:inherit;text-decoration:none}
+    .page{
+      width:min(1220px, calc(100% - 36px));
+      margin:26px auto 40px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      color:var(--text);
+    }
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      box-shadow:0 10px 24px rgba(47,128,237,.25);
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:330px 1fr;
+      gap:24px;
+    }
+    .sidebar,
+    .panel,
+    .tab-panel,
+    .project-card,
+    .skill-card,
+    .achievement-card{
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(216,229,243,.9);
+      box-shadow:var(--shadow);
+    }
+    .sidebar{
+      border-radius:var(--radius-xl);
+      padding:28px;
+      position:sticky;
+      top:20px;
+      align-self:start;
+    }
+    .avatar{
+      width:112px;
+      height:112px;
+      border-radius:28px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:44px;
+      font-weight:800;
+      letter-spacing:.03em;
+      margin-bottom:18px;
+      box-shadow:0 14px 30px rgba(47,128,237,.22);
+    }
+    h1{
+      margin:0;
+      font-size:2.2rem;
+      line-height:1.06;
+      letter-spacing:-.02em;
+    }
+    .role{
+      margin:10px 0 18px;
+      color:var(--accent);
+      font-size:1.02rem;
+      font-weight:700;
+    }
+    .intro-note{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.98rem;
+    }
+    .stack-mini{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:16px;
+    }
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid #dbe9fb;
+      color:#335a88;
+      font-size:.85rem;
+      font-weight:600;
+    }
+    .side-card{
+      margin-top:18px;
+      padding:18px;
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-soft);
+    }
+    .side-title{
+      margin:0 0 12px;
+      font-size:.86rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#476a92;
+    }
+    .contact-list{
+      display:grid;
+      gap:10px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .contact-item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      line-height:1.55;
+    }
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      margin-top:7px;
+      flex:0 0 auto;
+      box-shadow:0 0 0 5px rgba(47,128,237,.08);
+    }
+    .cta{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      padding:13px 16px;
+      border-radius:15px;
+      font-weight:700;
+      font-size:.94rem;
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;
+      box-shadow:0 12px 28px rgba(47,128,237,.20);
+    }
+    .btn.secondary{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .main{display:block}
+    .hero{
+      padding:28px;
+      border-radius:var(--radius-xl);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      right:-80px;
+      top:-80px;
+      width:240px;
+      height:240px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(86,204,242,.22), transparent 65%);
+    }
+    .hero-top{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:#2d5f97;
+      font-size:.84rem;
+      font-weight:700;
+      border:1px solid #dceafe;
+      margin-bottom:14px;
+    }
+    .hero h2{
+      margin:0;
+      font-size:2rem;
+      letter-spacing:-.02em;
+    }
+    .hero p{
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:1.02rem;
+      line-height:1.8;
+      max-width:780px;
+    }
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+    .hero-badge{
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:#355173;
+      font-size:.9rem;
+      font-weight:600;
+    }
+    .tabs{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0 0;padding:0}
+    .tab{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 18px;margin:0;line-height:1;border:1px solid var(--line);border-radius:14px;background:#fff;color:#5e7591;font-size:.95rem;font-weight:700;box-shadow:none;outline:none;vertical-align:middle;flex:0 0 auto;transition:background .18s ease,color .18s ease,border-color .18s ease;cursor:pointer}
+    .tab.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:none;transform:none}
+    .tab-panel{padding:22px;margin-top:10px}
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .section-title{
+      margin:0;
+      font-size:1.55rem;
+      letter-spacing:-.02em;
+    }
+    .section-sub{
+      color:var(--muted);
+      font-size:.96rem;
+    }
+    .projects{display:grid;gap:18px}
+    .project-card{
+      border-radius:24px;
+      padding:22px;
+      display:grid;
+      grid-template-columns:118px 1fr;
+      gap:20px;
+    }
+    .project-icon{
+      border-radius:22px;
+      background:linear-gradient(180deg,#eef6ff,#f7fbff);
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:40px;
+      min-height:118px;
+    }
+    .project-top{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .project-title{
+      margin:0;
+      font-size:1.42rem;
+    }
+    .project-type{
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:#2d5f97;
+      font-size:.78rem;
+      font-weight:800;
+      border:1px solid #dceafe;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      white-space:nowrap;
+    }
+    .project-desc{
+      margin:10px 0 10px;
+      color:#42617f;
+      font-style:italic;
+      line-height:1.65;
+    }
+    .project-points{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.75;
+    }
+    .tag-wrap{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .tag{
+      padding:8px 11px;
+      border-radius:12px;
+      background:#f3f8ff;
+      border:1px solid #dde9f7;
+      color:#385878;
+      font-size:.84rem;
+      font-weight:600;
+    }
+    .grid-two{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .skill-card,
+    .achievement-card{
+      padding:22px;
+      border-radius:22px;
+    }
+    .box-title{
+      margin:0 0 14px;
+      font-size:1.08rem;
+    }
+    .badge-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .badge{
+      padding:10px 13px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:#335a88;
+      font-size:.9rem;
+      font-weight:700;
+      border:1px solid #dceafe;
+    }
+    .achievement-list{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+    .footer-note{
+      text-align:center;
+      color:#6c83a0;
+      font-size:.94rem;
+      padding:4px 0 2px;
+    }
+    .hidden{display:none}
+    @media (max-width: 1024px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:relative;top:0}
+    }
+    @media (max-width: 760px){
+      .page{width:min(100% - 18px, 1220px); margin:14px auto 28px}
+      .project-card{grid-template-columns:1fr}
+      .grid-two{grid-template-columns:1fr}
+      h1{font-size:1.92rem}
+      .hero h2{font-size:1.65rem}
+      .sidebar,.hero,.tab-panel,.project-card,.skill-card,.achievement-card{border-radius:22px}
+    }
+
+    .main > * + *{margin-top:12px}
+    .tabs + .tab-panel{margin-top:10px}
+    .tab:hover,
+    .tab:focus,
+    .tab:focus-visible{
+      transform:none;
+      outline:none;
+      box-shadow:none;
+    }
+
+
+    .resume-link{
+      margin-top:10px;
+      font-size:.95rem;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .resume-link a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:700;
+    }
+    .resume-link a:hover{
+      text-decoration:underline;
+    }
+
+
+    .contact-item a{
+      color:inherit;
+      text-decoration:none;
+      word-break:break-word;
+    }
+    .contact-item a:hover{
+      text-decoration:underline;
+    }
+
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="layout">
+      <aside class="sidebar">
+<h1>NGUYEN HUNG<br>LE TRUNG</h1>
+        <div class="role">Junior .NET Backend Developer</div>
+        <p class="intro-note">
+          Software Engineering student at Sai Gon University with hands-on project experience in Java OOP, C# WinForms,
+          ASP.NET MVC and ASP.NET Core Web API.
+        </p>
+
+        <div class="stack-mini">
+          <span class="pill">Backend Focus</span>
+          <span class="pill">.NET / C#</span>
+          <span class="pill">Web API</span>
+        </div>
+
+        <div class="side-card">
+          <h3 class="side-title">Contact</h3>
+          <div class="contact-list">
+            <div class="contact-item"><span class="dot"></span><span>Email: <a href="mailto:trungbekerteo001@gmail.com">trungbekerteo001@gmail.com</a></span></div>
+            <div class="contact-item"><span class="dot"></span><span>Phone: <a href="tel:0963778828">0963778828</a></span></div>
+            <div class="contact-item"><span class="dot"></span><span>School: Sai Gon University</span></div>
+            <div class="contact-item"><span class="dot"></span><span>GitHub: <a href="https://github.com/trungbekerteo001" target="_blank" rel="noreferrer">github.com/trungbekerteo001</a></span></div>
+            <div class="contact-item"><span class="dot"></span><span>Resume: <a href="#" target="_blank" rel="noreferrer">link</a></span></div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3 class="side-title">Summary</h3>
+          <div class="contact-list">
+            <div class="contact-item"><span class="dot"></span><span>Strongest direction: Backend development with structured architecture.</span></div>
+            <div class="contact-item"><span class="dot"></span><span>Practical experience with authentication, CRUD modules and business workflows.</span></div>
+            <div class="contact-item"><span class="dot"></span><span>Public GitHub profile includes academic and personal repositories across multiple tech stacks.</span></div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3 class="side-title">Current strengths</h3>
+          <div class="badge-wrap">
+            <span class="badge">C# / .NET</span>
+            <span class="badge">ASP.NET Core</span>
+            <span class="badge">JWT</span>
+            <span class="badge">Repository</span>
+            <span class="badge">OOP</span>
+            <span class="badge">SQL</span>
+          </div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/trungbekerteo001" target="_blank" rel="noreferrer">Open GitHub</a>
+</div>
+      </aside>
+
+      <main class="main">
+        <section class="panel hero">
+          <div class="hero-top">
+            <div>
+              <div class="eyebrow">Portfolio Overview</div>
+              <h2>Building practical software with a growing backend mindset</h2>
+              <p>
+                I am building my path toward becoming a .NET Backend Developer. Through my projects, I have moved from
+                object-oriented programming foundations to more structured systems using layered architecture, DTO mapping,
+                JWT authentication, repository pattern and CQRS/MediatR-style organization.
+              </p>
+              <div class="hero-badges">
+                <span class="hero-badge">Java OOP</span>
+                <span class="hero-badge">C# WinForms</span>
+                <span class="hero-badge">ASP.NET MVC</span>
+                <span class="hero-badge">ASP.NET Core Web API</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="projects">Projects</button>
+          <button class="tab" data-tab="skills">Technical Skills</button>
+          <button class="tab" data-tab="achievements">Achievements</button>
+        </div>
+
+        <section id="tab-projects" class="tab-panel">
+          <div class="section-head">
+            <h3 class="section-title">Featured Projects</h3>
+            <div class="section-sub">Selected from the repositories provided by the owner</div>
+          </div>
+
+          <div class="projects">
+            <article class="project-card">
+              <div class="project-icon">⚙️</div>
+              <div>
+                <div class="project-top">
+                  <h4 class="project-title">StoreApp</h4>
+                  <span class="project-type">ASP.NET Core API</span>
+                </div>
+                <p class="project-desc">A backend-focused store management system organized with a clearer multi-layer structure.</p>
+                <ul class="project-points">
+                  <li>Implemented authentication and authorization flows with JWT.</li>
+                  <li>Organized source code into API, Application, Core and Infrastructure layers.</li>
+                  <li>Applied repository pattern, DTO mapping, global exception handling and pagination metadata.</li>
+                  <li>Built modules such as users, categories, suppliers, products, GRN and orders.</li>
+                  <li>Used CQRS / MediatR-oriented flow to separate commands and queries more clearly.</li>
+                </ul>
+                <div class="tag-wrap">
+                  <span class="tag">C#</span>
+                  <span class="tag">ASP.NET Core</span>
+                  <span class="tag">Web API</span>
+                  <span class="tag">JWT</span>
+                  <span class="tag">CQRS / MediatR</span>
+                  <span class="tag">Repository Pattern</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-icon">🛒</div>
+              <div>
+                <div class="project-top">
+                  <h4 class="project-title">MiniStartup1</h4>
+                  <span class="project-type">E-commerce Web App</span>
+                </div>
+                <p class="project-desc">An ASP.NET MVC e-commerce website with both customer-facing features and an admin area.</p>
+                <ul class="project-points">
+                  <li>Built login, registration, product browsing, search, filtering and cart workflows.</li>
+                  <li>Implemented order processing, coupon handling and management features for multiple business entities.</li>
+                  <li>Created admin modules for products, brands, coupons, users, roles, sliders and contacts.</li>
+                  <li>Worked with Entity Framework Core, Identity, session-based flows and SQL-backed data models.</li>
+                </ul>
+                <div class="tag-wrap">
+                  <span class="tag">ASP.NET MVC</span>
+                  <span class="tag">Entity Framework Core</span>
+                  <span class="tag">Identity</span>
+                  <span class="tag">SQL Server</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-icon">💻</div>
+              <div>
+                <div class="project-top">
+                  <h4 class="project-title">QuanLyThuQuan / QuanLyThuQuan2</h4>
+                  <span class="project-type">Desktop Management System</span>
+                </div>
+                <p class="project-desc">A C# WinForms management application for members, devices and borrowing-related workflows.</p>
+                <ul class="project-points">
+                  <li>Structured the solution with BUS, DAO and DTO layers.</li>
+                  <li>Developed forms and workflows for members, devices, loans, reservations, violations and history tracking.</li>
+                  <li>Demonstrated practical understanding of desktop CRUD applications with business rules and database integration.</li>
+                </ul>
+                <div class="tag-wrap">
+                  <span class="tag">C#</span>
+                  <span class="tag">WinForms</span>
+                  <span class="tag">BUS / DAO / DTO</span>
+                  <span class="tag">SQL</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-icon">☕</div>
+              <div>
+                <div class="project-top">
+                  <h4 class="project-title">OOP Project</h4>
+                  <span class="project-type">Java Console App</span>
+                </div>
+                <p class="project-desc">A Java project used to strengthen object-oriented design and reusable logic structure.</p>
+                <ul class="project-points">
+                  <li>Used packages and inheritance to organize account, product, customer, employee and billing logic.</li>
+                  <li>Built a menu-driven console application to practice OOP design and input-processing flows.</li>
+                  <li>Established a strong foundation in abstraction, class design and reusable code organization.</li>
+                </ul>
+                <div class="tag-wrap">
+                  <span class="tag">Java</span>
+                  <span class="tag">OOP</span>
+                  <span class="tag">Console App</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-icon">🌐</div>
+              <div>
+                <div class="project-top">
+                  <h4 class="project-title">DoAnWebN11</h4>
+                  <span class="project-type">Front-end Website</span>
+                </div>
+                <p class="project-desc">A static web project focused on interface building and client-side shopping interactions.</p>
+                <ul class="project-points">
+                  <li>Created multi-page layouts for home, detail, cart and admin-related interfaces.</li>
+                  <li>Handled product rendering and cart behavior using JavaScript and localStorage.</li>
+                  <li>Strengthened front-end fundamentals in HTML, CSS, responsive layout and browser-side interaction.</li>
+                </ul>
+                <div class="tag-wrap">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Responsive UI</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="tab-skills" class="tab-panel hidden">
+          <div class="section-head">
+            <h3 class="section-title">Technical Skills</h3>
+            <div class="section-sub">Current technical foundation shown in the source projects</div>
+          </div>
+
+          <div class="grid-two">
+            <article class="skill-card">
+              <h4 class="box-title">Languages & Core Development</h4>
+              <div class="badge-wrap">
+                <span class="badge">C#</span>
+                <span class="badge">Java</span>
+                <span class="badge">JavaScript</span>
+                <span class="badge">HTML</span>
+                <span class="badge">CSS</span>
+                <span class="badge">SQL</span>
+                <span class="badge">OOP</span>
+                <span class="badge">CRUD</span>
+              </div>
+            </article>
+
+            <article class="skill-card">
+              <h4 class="box-title">Frameworks & Platforms</h4>
+              <div class="badge-wrap">
+                <span class="badge">ASP.NET Core</span>
+                <span class="badge">ASP.NET MVC</span>
+                <span class="badge">Web API</span>
+                <span class="badge">WinForms</span>
+                <span class="badge">Entity Framework Core</span>
+                <span class="badge">ASP.NET Identity</span>
+              </div>
+            </article>
+
+            <article class="skill-card">
+              <h4 class="box-title">Architecture & Backend Practices</h4>
+              <div class="badge-wrap">
+                <span class="badge">JWT Authentication</span>
+                <span class="badge">Repository Pattern</span>
+                <span class="badge">CQRS / MediatR</span>
+                <span class="badge">DTO Mapping</span>
+                <span class="badge">Exception Handling</span>
+                <span class="badge">Pagination / Filtering</span>
+                <span class="badge">Session / Cookie</span>
+              </div>
+            </article>
+
+            <article class="skill-card">
+              <h4 class="box-title">Tools</h4>
+              <div class="badge-wrap">
+                <span class="badge">Visual Studio</span>
+                <span class="badge">GitHub</span>
+                <span class="badge">SQL Server</span>
+                <span class="badge">MySQL / phpMyAdmin</span>
+                <span class="badge">Git</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="tab-achievements" class="tab-panel hidden">
+          <div class="section-head">
+            <h3 class="section-title">Achievements</h3>
+            <div class="section-sub">What the projects currently demonstrate</div>
+          </div>
+
+          <div class="grid-two">
+            <article class="achievement-card">
+              <h4 class="box-title">Development Progress</h4>
+              <ul class="achievement-list">
+                <li>Built projects across multiple environments: console, desktop, web application and web API.</li>
+                <li>Progressed from OOP practice projects to more structured backend systems with clearer layering.</li>
+                <li>Modeled business processes such as products, orders, GRN and borrowing workflows.</li>
+              </ul>
+            </article>
+
+            <article class="achievement-card">
+              <h4 class="box-title">Technical Highlights</h4>
+              <ul class="achievement-list">
+                <li>Applied JWT authentication, repository pattern and DTO-based API responses in backend development.</li>
+                <li>Worked with CQRS / MediatR-oriented organization in StoreApp to improve code separation.</li>
+                <li>Handled both administration and end-user flows in e-commerce and management systems.</li>
+              </ul>
+            </article>
+
+            <article class="achievement-card">
+              <h4 class="box-title">GitHub Profile</h4>
+              <ul class="achievement-list">
+                <li>Maintains a public GitHub profile under the username <strong>trungbekerteo001</strong>.</li>
+                <li>Profile displays the <strong>Pull Shark</strong> achievement badge.</li>
+                <li>Repositories reflect a broad learning path across Java, C#, desktop software and ASP.NET-based systems.</li>
+              </ul>
+            </article>
+
+            <article class="achievement-card">
+              <h4 class="box-title">Career Direction</h4>
+              <ul class="achievement-list">
+                <li>Current strongest direction: Junior Backend Developer / .NET Developer.</li>
+                <li>Interested in maintainable architecture, real business logic and scalable API design.</li>
+                <li>Actively building stronger foundations in software architecture and system organization.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const panels = {
+      projects: document.getElementById('tab-projects'),
+      skills: document.getElementById('tab-skills'),
+      achievements: document.getElementById('tab-achievements')
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(item => item.classList.remove('active'));
+        Object.values(panels).forEach(panel => panel.classList.add('hidden'));
+        tab.classList.add('active');
+        panels[tab.dataset.tab].classList.remove('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
